@@ -1,19 +1,36 @@
-import React from "react";
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 
-const AllContactsModal = ({allContacts}) => {
-  return (
-    <div>
-      <div
+const ModalWithDynamicData = ({contacts, apiURL, setApiURL, allContactsURL, usaContactsURL, openModal, setOpenModal}) => {
+
+
+const [even, setEven] = useState(false)
+
+
+
+const handleEvenId = () => {
+
+    const evenIdNumbers = contacts.filter(contact => contact?.id %2 === 0)
+
+    setc
+
+}
+
+
+
+    return (
+        <div>
+            <div
         className="modal fade modal-lg modal-dialog-scrollable"
-        id="allContactsModal"
+        id="dynamicModal"
         tabIndex="-1"
-        aria-labelledby="allContactsModalLabel"
+        aria-labelledby="dynamicModalLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="allContactsModalLabel">
+              <h1 className="modal-title fs-5" id="dynamicModalLabel">
                 All Contacts
               </h1>
               <button
@@ -25,7 +42,7 @@ const AllContactsModal = ({allContacts}) => {
             </div>
             <div className="modal-body">
 
-            <table class="table">
+            <table className="table">
   <thead>
     <tr>
       <th scope="col">Index</th>
@@ -37,7 +54,7 @@ const AllContactsModal = ({allContacts}) => {
   <tbody>
 
 {
-    allContacts?.map((contact, i) => 
+    contacts?.map((contact, i) => 
         <tr key={contact.id}>
             <td>{i+1}</td>
           <td>{contact?.phone}</td>
@@ -60,30 +77,33 @@ const AllContactsModal = ({allContacts}) => {
              <div className="d-flex justify-content-between align-items-center w-100">
              <div className="form-check">
                 <input
+                onChange={handleEvenId}
                   className="form-check-input"
                   type="checkbox"
                   value=""
-                  id="flexCheckDefault"
+                  id="even"
                 />
-                <label className="form-check-label" htmlFor="flexCheckDefault">
+                <label className="form-check-label" htmlFor="even">
                  Only Even
                 </label>
               </div>
 
               <div className="d-flex gap-2">
                 <button
+          onClick={()=> setApiURL(allContactsURL)}
                   className="btn btn-sm btn-outline-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#allContactsModal"
+                //   data-bs-toggle="modal"
+                //   data-bs-target="#dynamicModal"
                   type="button"
                 >
                   All Contacts
                 </button>
 
                 <button
+        onClick={() => setApiURL(usaContactsURL)}   
                   className="btn btn-sm btn-outline-warning"
-                  data-bs-toggle="modal"
-                  data-bs-target="#usContactsModal"
+                //   data-bs-toggle="modal"
+                //   data-bs-target="#dynamicModal"
                   type="button"
                 >
                   US Contacts
@@ -102,8 +122,8 @@ const AllContactsModal = ({allContacts}) => {
           </div>
         </div>
       </div>
-    </div>
-  );
+        </div>
+    );
 };
 
-export default AllContactsModal;
+export default ModalWithDynamicData;

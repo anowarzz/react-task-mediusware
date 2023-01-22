@@ -2,23 +2,54 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import AllContactsModal from './AllContactsModal';
+import ModalWithDynamicData from './ModalWithDynamicData';
 import USContactsModal from './USContactsModal';
 
 const Problem2 = () => {
 
-// state to store all contacts from server 
-const [allContacts, setAllContacts] = useState([])
+    
 
-useEffect(() => {
+ // state to open or close the modal
+const [openModal, setOpenModal] = useState(false);
 
-fetch('https://contact.mediusware.com/api/contacts/')
-.then(res => res.json())
-.then(data => {
-    console.log(data.results)
-    setAllContacts(data?.results)
-})
 
-}, [])
+// state to set the API URL
+const [apiURL, setApiURL] = useState(null)
+
+// API URLS
+const allContactsURL = "https://contact.mediusware.com/api/contacts/"
+const usaContactsURL = "https://contact.mediusware.com/api/country-contacts/united%20states/"
+
+
+
+
+// function to open modal and and set the api url
+const handleContacts = (url) => {
+
+setOpenModal(true)
+setApiURL(url)
+
+
+}
+
+
+
+// state to store the contacts 
+const [contacts, setContacts] = useState([])
+
+
+useEffect( () => {
+
+ if(apiURL){
+    fetch(apiURL)
+    .then(res => res.json())
+    .then(data => {
+        console.log(data.results)
+        setContacts(data?.results)
+    })
+ }
+
+}, [apiURL])
 
 
     return (
@@ -29,15 +60,28 @@ fetch('https://contact.mediusware.com/api/contacts/')
                 
                 <div className="d-flex justify-content-center gap-3">
 
-                <button className="btn btn-lg btn-outline-primary" data-bs-toggle="modal" data-bs-target="#allContactsModal" type="button" >All Contacts</button>
+                <button  onClick={()=>handleContacts(allContactsURL)} className="btn btn-lg btn-outline-primary" data-bs-toggle="modal" data-bs-target="#dynamicModal" type="button" >All Contacts</button>
                 
 
-                <button className="btn btn-lg btn-outline-warning"  data-bs-toggle="modal" data-bs-target="#usContactsModal" type="button" >US Contacts</button>
+                <button onClick={()=>handleContacts(usaContactsURL)} className="btn btn-lg btn-outline-warning"  data-bs-toggle="modal" data-bs-target="#dynamicModal" type="button" >US Contacts</button>
                 </div>
                 
 
-                <AllContactsModal allContacts={allContacts}/>
-                <USContactsModal />
+                {
+                <ModalWithDynamicData 
+                contacts = {contacts}
+                setContacts = {setContacts}
+                    apiURL = {apiURL}
+                    setApiURL = {setApiURL}
+                    allContactsURL = {allContactsURL}
+                    usaContactsURL = {usaContactsURL} 
+                    openModal = {openModal}
+                    setOpenModal = {setOpenModal}
+                    />
+                    
+                }
+
+
             </div>
         </div>
     );
