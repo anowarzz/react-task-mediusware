@@ -1,14 +1,24 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import AllContactsModal from './AllContactsModal';
 import USContactsModal from './USContactsModal';
 
 const Problem2 = () => {
 
-// 
+// state to store all contacts from server 
 const [allContacts, setAllContacts] = useState([])
 
+useEffect(() => {
 
+fetch('https://contact.mediusware.com/api/contacts/')
+.then(res => res.json())
+.then(data => {
+    console.log(data.results)
+    setAllContacts(data?.results)
+})
+
+}, [])
 
 
     return (
@@ -26,7 +36,7 @@ const [allContacts, setAllContacts] = useState([])
                 </div>
                 
 
-                <AllContactsModal />
+                <AllContactsModal allContacts={allContacts}/>
                 <USContactsModal />
             </div>
         </div>

@@ -4,27 +4,27 @@ const USContactsModal = () => {
   return (
     <div>
       <div
-        class="modal fade modal-lg modal-dialog-scrollable"
+        className="modal fade modal-lg modal-dialog-scrollable"
         id="usContactsModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="usContactsModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="usContactsModalLabel">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="usContactsModalLabel">
                 US Contacts
               </h1>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">...</div>
-            <div class="modal-footer">
+            <div className="modal-body">...</div>
+            <div className="modal-footer">
             <button
                 className="btn btn-outline-primary"
                 data-bs-toggle="modal"
@@ -44,7 +44,7 @@ const USContactsModal = () => {
               </button>
               <button
                 type="button"
-                class="btn btn-secondary"
+                className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
                 Close
