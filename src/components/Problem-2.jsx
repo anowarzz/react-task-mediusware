@@ -1,9 +1,8 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import AllContactsModal from './AllContactsModal';
 import ModalWithDynamicData from './ModalWithDynamicData';
-import USContactsModal from './USContactsModal';
+
 
 const Problem2 = () => {
 
