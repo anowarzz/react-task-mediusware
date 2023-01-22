@@ -1,8 +1,13 @@
 import React from 'react';
+import { useState } from 'react';
 import AllContactsModal from './AllContactsModal';
 import USContactsModal from './USContactsModal';
 
 const Problem2 = () => {
+
+// 
+const [allContacts, setAllContacts] = useState([])
+
 
 
 
