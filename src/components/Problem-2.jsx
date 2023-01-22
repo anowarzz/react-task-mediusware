@@ -1,4 +1,5 @@
 import React from 'react';
+import AllContactsModal from './AllContactsModal';
 
 const Problem2 = () => {
 
@@ -13,6 +14,8 @@ const Problem2 = () => {
                 <button className="btn btn-lg btn-outline-warning" type="button" >US Contacts</button>
                 </div>
                 
+
+                <AllContactsModal />
             </div>
         </div>
     );
